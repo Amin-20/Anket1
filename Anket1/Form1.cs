@@ -14,7 +14,7 @@ using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
 
 namespace Anket1
 {
-   
+
     public partial class Form1 : Form
     {
         List<Human> humans = new List<Human>();
@@ -116,37 +116,45 @@ namespace Anket1
 
         private void changeBtn_Click(object sender, EventArgs e)
         {
-            fileNameTxtb.Text = user.Filename + ".json";
-            if (nameTxtb.Text != user.Name)
-            {
-                user.Name = nameTxtb.Text;
-            }
-            if (human.Name != user.Name)
-            {
-                human.Filename = user.Filename;
-            }
-            else
+            try
             {
                 fileNameTxtb.Text = user.Filename + ".json";
+                if (nameTxtb.Text != user.Name)
+                {
+                    user.Name = nameTxtb.Text;
+                }
+                if (human.Name != user.Name)
+                {
+                    human.Filename = user.Filename;
+                }
+                else
+                {
+                    fileNameTxtb.Text = user.Filename + ".json";
+                }
+                if (surnameTxtb.Text != user.Surname)
+                {
+                    user.Surname = surnameTxtb.Text;
+                }
+                if (emailTxtb.Text != user.Email)
+                {
+                    user.Email = emailTxtb.Text;
+                }
+                if (phoneTxtb.Text != user.Phone)
+                {
+                    user.Phone = phoneTxtb.Text;
+                }
+                if (gunaBirthDayTxtb.Text != user.BirthDay)
+                {
+                    user.BirthDay = gunaBirthDayTxtb.Value.ToString();
+                }
+                human = user;
+                FileHelper.WriteJsonHuman(human);
             }
-            if (surnameTxtb.Text != user.Surname)
+            catch (Exception)
             {
-                user.Surname = surnameTxtb.Text;
+
+
             }
-            if (emailTxtb.Text != user.Email)
-            {
-                user.Email = emailTxtb.Text;
-            }
-            if (phoneTxtb.Text != user.Phone)
-            {
-                user.Phone = phoneTxtb.Text;
-            }
-            if (gunaBirthDayTxtb.Text != user.BirthDay)
-            {
-                user.BirthDay = gunaBirthDayTxtb.Value.ToString();
-            }
-            human = user;
-            FileHelper.WriteJsonHuman(human);
         }
     }
 
